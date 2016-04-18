@@ -97,6 +97,9 @@ describe('./lib/validation.js', function () {
             const config = {
                 clientId: 'some client id',
                 clientSecret: 'some client secret',
+                dpMallId: 1,
+                sharedKey: 'someShardeKey',
+                baseUrl: 'http://test.com/',
             };
 
             const result = validation.validateConfig(config);
@@ -120,6 +123,24 @@ describe('./lib/validation.js', function () {
                 {
                     clientId: [],
                     clientSecret: {}
+                },
+                {
+                    clientId: 'someClient',
+                    clientSecret: 'someSecret',
+                    dpMallId: '1',
+                },
+                {
+                    clientId: 'someClient',
+                    clientSecret: 'someSecret',
+                    dpMallId: 1,
+                    sharedKey: 1,
+                },
+                {
+                    clientId: 'someClient',
+                    clientSecret: 'someSecret',
+                    dpMallId: 1,
+                    sharedKey: 'someSharedKey',
+                    baseUrl: 1,
                 },
             ];
 
