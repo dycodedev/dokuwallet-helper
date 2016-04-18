@@ -47,6 +47,7 @@ describe('lib/request.js', () => {
                 body: {},
                 url: 'http://httpbin.org/post',
                 wordsSource: {},
+                secret: 'someSecret',
             };
 
             request.hitApi(config, err => {
@@ -62,6 +63,7 @@ describe('lib/request.js', () => {
                 body: {},
                 url: 'http://httpbin.org/post',
                 wordsSource: ['a'],
+                secret: 'someSecret',
             };
 
             request.hitApi(config, (err, response) => {

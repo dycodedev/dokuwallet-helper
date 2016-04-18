@@ -4,13 +4,14 @@ const util = require('../lib/util');
 const assert = require('assert');
 
 describe('lib/util.js', () => {
-    describe('makeWords(arrOfString)', () => {
+    describe('makeWords(arrOfString, secret)', () => {
         it('Should return empty string when arrOfString is not an array', () => {
             const args = [1, 'asd', NaN, undefined, null, {}];
+            const secret = 'someSecret';
             let result;
 
             args.forEach(arg => {
-                result = util.makeWords(arg);
+                result = util.makeWords(arg, secret);
 
                 assert(result.length < 1);
                 assert(typeof result === 'string');
