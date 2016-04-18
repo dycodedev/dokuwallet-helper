@@ -30,5 +30,11 @@ describe('lib/util.js', () => {
                 assert(typeof result === 'string');
             });
         });
-    })
+    });
+
+    describe('generateSystrace()', () => {
+        it('Should return string with length 30 character', () => {
+            assert(util.generateSystrace().length === 30);
+        });
+    });
 });
