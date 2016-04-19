@@ -1,0 +1,42 @@
+'use strict';
+
+const assert = require('assert');
+const _ = require('lodash');
+const config = require('../credentials.json');
+const mainFactory = require('../');
+
+describe('DokuWallet(config)', function() {
+    this.timeout(30000);
+
+    it('Should return object if config is valid', () => {
+        assert(_.isObject(mainFactory(config)));
+    });
+
+    it('Should throw exception if config is invalid', () => {
+        const config = {
+            clientId: '12345',
+        };
+
+        assert.throws(() => {
+            mainFactory(config);
+        });
+    });
+
+    describe('.signOnPartner(done)', () => {
+        const main = mainFactory(config);
+
+        it('Should carry result on callback if everyting is ok', done => {
+            main.signOnPartner((err, result) => {
+                assert.ifError(err);
+                assert(result);
+                assert.equal(result.clientId, config.clientId);
+                assert.equal(result.responseCode, '0000');
+                assert(result.responseMessage);
+                assert(result.accessToken);
+                assert.equal(result.expiresIn, 7200);
+
+                return done();
+            });
+        });
+    });
+});

@@ -4,22 +4,13 @@ const request = require("../lib/request");
 const assert = require('assert');
 
 describe('lib/request.js', () => {
-    describe('doPostRequest(url, body, auth, done)', function() {
+    describe('doPostRequest(url, body, done)', function() {
         this.timeout(30000);
 
         it('Should carry error on callback if url is not a valid url', done => {
-            request.doPostRequest(null, {}, false, err => {
+            request.doPostRequest(null, {}, err => {
                 assert.ok(err);
                 assert(err.message.indexOf('URL') >= 0);
-
-                return done();
-            });
-        });
-
-        it('Should carry error on callbck if auth is defined but not string', done => {
-            request.doPostRequest('http://httpbin.org/post', {}, true, (err, response) => {
-                assert.ifError(response);
-                assert.ok(err);
 
                 return done();
             });
@@ -32,7 +23,6 @@ describe('lib/request.js', () => {
         it('Should carry error on callback if config is invalid', done => {
             const config = {
                 body: {},
-                auth: 'some string',
             };
 
             request.hitApi(config, err => {
