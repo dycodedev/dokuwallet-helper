@@ -39,4 +39,48 @@ describe('DokuWallet(config)', function() {
             });
         });
     });
+
+    describe('.register(userData, systrace, done)', () => {
+        const main = mainFactory(config);
+
+        it('Should throw error if systrace is falsy', done => {
+            main.register({}, '', (err, result) => {
+                assert.ifError(result);
+                assert(err);
+
+                return done();
+            });
+        });
+
+        it('Should throw error if required fields are not provided', done => {
+            main.register({}, 'some systrace', (err, result) => {
+                assert.ifError(result);
+                assert(err);
+
+                return done();
+            });
+        });
+    });
+
+    describe('.debitPurchase(payload, systrace, done)', () => {
+        const main = mainFactory(config);
+
+        it('Should throw error if systrace is falsy', done => {
+            main.debitPurchase({}, '', (err, result) => {
+                assert.ifError(result);
+                assert(err);
+
+                return done();
+            });
+        });
+
+        it('Should throw error if required fields are not provided', done => {
+            main.debitPurchase({}, 'some systrace', (err, result) => {
+                assert.ifError(result);
+                assert(err);
+
+                return done();
+            });
+        });
+    });
 });
