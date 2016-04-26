@@ -3,14 +3,13 @@
 const assert = require('assert');
 const _ = require('lodash');
 const config = require('../credentials.json');
-const userFactory = require('../lib/user');
+const mainFactory = require('../');
+const user = mainFactory(config).user;
 
 describe('./lib/user.js', function() {
     this.timeout(30000);
 
-    describe('.register(userData, systrace, done)', () => {
-        const user = userFactory(config);
-
+    describe('.register(userData, done)', () => {
         it('Should throw error if systrace is falsy', done => {
             user.register({ systrace: '' }, (err, result) => {
                 assert.ifError(result);
@@ -24,6 +23,17 @@ describe('./lib/user.js', function() {
             user.register({ systrace: 'some systrace' }, (err, result) => {
                 assert.ifError(result);
                 assert(err);
+
+                return done();
+            });
+        });
+    });
+
+    describe('.inquiry(payload, done)', () => {
+        it('Should throw error if required parameters are not provided', done => {
+            user.inquiry({}, (err, result) => {
+                assert(err);
+                assert.ifError(result);
 
                 return done();
             });
