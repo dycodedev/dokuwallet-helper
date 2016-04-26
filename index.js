@@ -39,7 +39,10 @@ module.exports = function constructHelper(config) {
                 }
 
                 if (result.responseCode !== '0000') {
-                    return done(new Error(result.responseMessage.en));
+                    const error = new Error(result.responseMessage.en);
+                    error.code = result.responseCode;
+
+                    return done(err);
                 }
 
                 result.systrace = body.systrace;
@@ -120,7 +123,10 @@ module.exports = function constructHelper(config) {
                 }
 
                 if (result.responseCode !== '0000') {
-                    return done(new Error(result.responseMessage.en));
+                    const error = new Error(result.responseMessage.en);
+                    error.code = result.responseCode;
+
+                    return done(err);
                 }
 
                 return done(null, result);
