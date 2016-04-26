@@ -111,6 +111,7 @@ module.exports = function constructHelper(config) {
                     newPayload.transactionId,
                 ],
                 secret: config.clientSecret,
+                url: config.baseUrl + '/payment',
             };
 
             return request.hitApi(cfg, (err, result) => {
