@@ -50,11 +50,7 @@ module.exports = function constructHelper(config) {
             });
         },
 
-        debitPurchase(payload, systrace, done) {
-            if (!systrace) {
-                return done(new Error('systrace is required'));
-            }
-
+        debitPurchase(payload, done) {
             const requiredFields = [
                 {
                     name: 'accessToken',
@@ -65,6 +61,11 @@ module.exports = function constructHelper(config) {
                     name: 'accountId',
                     validationType: 'required',
                     message: 'accountId is required',
+                },
+                {
+                    name: 'systrace',
+                    validationType: 'required',
+                    message: 'systrace is required',
                 },
                 {
                     name: 'amount',
@@ -102,13 +103,14 @@ module.exports = function constructHelper(config) {
             const newPayload = _.pick(payload, correctFields);
             newPayload.clientId = newPayload.clientId || config.clientId;
             newPayload.dpMallId = newPayload.dpMallId || config.dpMallId;
+            newPayload.amount = parseInt(newPayload.amount);
 
             const cfg = {
                 body: newPayload,
                 wordsSource: [
                     config.clientId,
                     newPayload.amount,
-                    systrace,
+                    payload.systrace,
                     config.dpMallId,
                     config.sharedKey,
                     newPayload.transactionId,
@@ -126,7 +128,7 @@ module.exports = function constructHelper(config) {
                     const error = new Error(result.responseMessage.en);
                     error.code = result.responseCode;
 
-                    return done(err);
+                    return done(error);
                 }
 
                 return done(null, result);
