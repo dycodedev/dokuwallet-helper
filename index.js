@@ -103,7 +103,6 @@ module.exports = function constructHelper(config) {
             const newPayload = _.pick(payload, correctFields);
             newPayload.clientId = newPayload.clientId || config.clientId;
             newPayload.dpMallId = newPayload.dpMallId || config.dpMallId;
-            newPayload.amount = parseInt(newPayload.amount);
 
             const cfg = {
                 body: newPayload,
