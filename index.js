@@ -39,7 +39,7 @@ module.exports = function constructHelper(config) {
                 }
 
                 if (result.responseCode !== '0000') {
-                    const error = new Error(result.responseMessage.en);
+                    const error = util.handleError(result);
                     error.code = result.responseCode;
 
                     return done(err);
@@ -124,7 +124,7 @@ module.exports = function constructHelper(config) {
                 }
 
                 if (result.responseCode !== '0000') {
-                    const error = new Error(result.responseMessage.en);
+                    const error = util.handleError(result);
                     error.code = result.responseCode;
 
                     return done(error);

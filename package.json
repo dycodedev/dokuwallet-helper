@@ -1,6 +1,6 @@
 {
   "name": "dokuwallet-helper",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Dokuwallet h2h API helper",
   "main": "index.js",
   "scripts": {

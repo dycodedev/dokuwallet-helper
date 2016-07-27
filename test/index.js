@@ -44,7 +44,7 @@ describe('DokuWallet(config)', function() {
         const main = mainFactory(config);
 
         it('Should throw error if systrace is falsy', done => {
-            main.debitPurchase({}, '', (err, result) => {
+            main.debitPurchase({}, (err, result) => {
                 assert.ifError(result);
                 assert(err);
 
@@ -53,7 +53,7 @@ describe('DokuWallet(config)', function() {
         });
 
         it('Should throw error if required fields are not provided', done => {
-            main.debitPurchase({}, 'some systrace', (err, result) => {
+            main.debitPurchase({}, (err, result) => {
                 assert.ifError(result);
                 assert(err);
 
